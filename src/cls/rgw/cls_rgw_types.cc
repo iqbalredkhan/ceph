@@ -404,7 +404,11 @@ bool rgw_cls_bi_entry::get_info(cls_rgw_obj_key *key,
 
   return account;
 }
-
+void rgw_cls_bi_entry::generate_test_instances(list<rgw_cls_bi_entry*>& r){
+  rgw_cls_bi_entry *entry = new rgw_cls_bi_entry;
+  r.push_back(entry);
+  r.push_back(new rgw_cls_bi_entry);
+}
 void rgw_bucket_olh_entry::dump(Formatter *f) const
 {
   encode_json("key", key, f);
@@ -426,7 +430,12 @@ void rgw_bucket_olh_entry::decode_json(JSONObj *obj)
   JSONDecoder::decode_json("exists", exists, obj);
   JSONDecoder::decode_json("pending_removal", pending_removal, obj);
 }
-
+void rgw_bucket_olh_entry::generate_test_instances(list<rgw_bucket_olh_entry*>& ro)
+{
+  rgw_bucket_olh_entry *entry = new rgw_bucket_olh_entry;
+  ro.push_back(entry);
+  ro.push_back(new rgw_bucket_olh_entry);
+}
 void rgw_bucket_olh_log_entry::generate_test_instances(list<rgw_bucket_olh_log_entry*>& o)
 {
   rgw_bucket_olh_log_entry *entry = new rgw_bucket_olh_log_entry;
@@ -654,6 +663,16 @@ void rgw_bucket_dir::dump(Formatter *f) const
   }
   f->close_section();
 }
+void rgw_usage_data::dump(Formatter *f) const
+{
+}
+
+void rgw_usage_data::generate_test_instances(list<rgw_usage_data *> &o)
+{
+  rgw_usage_data *entry = new rgw_usage_data;
+  o.push_back(entry);
+  o.push_back(new rgw_usage_data);
+}
 
 void rgw_usage_log_entry::dump(Formatter *f) const
 {
@@ -700,6 +719,28 @@ void rgw_usage_log_entry::generate_test_instances(list<rgw_usage_log_entry *> &o
   entry->usage_map["get_obj"] = usage_data;
   o.push_back(entry);
   o.push_back(new rgw_usage_log_entry);
+}
+
+void rgw_usage_log_info::dump(Formatter *f) const
+{
+}
+
+void rgw_usage_log_info::generate_test_instances(list<rgw_usage_log_info *> &o)
+{
+  rgw_usage_log_info *entry = new rgw_usage_log_info;
+  o.push_back(entry);
+  o.push_back(new rgw_usage_log_info);
+}
+
+void rgw_user_bucket::dump(Formatter *f) const
+{
+}
+
+void rgw_user_bucket::generate_test_instances(list<rgw_user_bucket *> &o)
+{
+  rgw_user_bucket *entry = new rgw_user_bucket;
+  o.push_back(entry);
+  o.push_back(new rgw_user_bucket);
 }
 
 void cls_rgw_reshard_entry::generate_key(const string& tenant, const string& bucket_name, string *key)
@@ -761,7 +802,7 @@ void cls_rgw_lc_entry::dump(Formatter *f) const
   encode_json("status", status, f);
 }
 
-void generate_test_instances(list<cls_rgw_lc_entry*>& ls)
+void cls_rgw_lc_entry::generate_test_instances(list<cls_rgw_lc_entry*>& ls)
 {
 }
 
