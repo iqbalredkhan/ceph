@@ -70,6 +70,7 @@ struct rgw_zone_set {
     ceph::decode(entries, bl);
   }
 
+	
   void insert(const std::string& zone, std::optional<std::string> location_key);
   bool exists(const std::string& zone, std::optional<std::string> location_key) const;
 };
